@@ -29,6 +29,7 @@ public class SecurityUtil {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(SecurityUtil.md5code("123456"));
+
+		System.out.println(SecurityUtil.md5code("w0CDwKBn+cia0KVdzi9nxjTGkWAt5UiGLNiB2VkjbYrW5ZWWhAmJCbyTebMX rlxVhzhWvHZKG6ClwHz5eqN3nT37NNAAPfEinW17CNgB/I65ZhUiofBEd9tp xzvzIa88TSykyHllTSrhir482pYL9OB4XE+qJ9hqltbJv7Kj6o7Axgn0cgf5 3496AQupKpqA6krsHAwD8Hd85vHOKfb3jspZF2Vqz5lUt7kKJLTvJVe1RNaz TbxzecmLn7q39Uh2NTwqgOYm2NLQoJStMPxekY61kVZIf6frnihx2n0KHZVG RyPA35f58L7IdRUbtvAxB/NuxgFNWDQbvty/Th0V/C3ucmP/LTGDcTwA0ncR 7Jk5y9v0ONck9KvCdJCUrhElEskjzESPIZdSAelo/eKW/qHjTImKinWQk+3J Lre9qAFtgveJPO3GV5sLUmJQuUy6kMaYuvSpwqEBvv9W9jMbrg=="));
 	}
 }

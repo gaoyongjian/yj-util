@@ -86,6 +86,11 @@ public class UUID {
 
 	public static void main(String[] args) {
 		// System.out.println(generateNumber());
-		System.out.println(UUID.getUUID());
+
+		for(int i=0;i<1000;i++){
+			System.out.println(UUID.getUUID());
+		}
+		System.out.println(generateNumber());
+		System.out.println(generateNumber2());
 	}
 }
