@@ -2,10 +2,13 @@ package com.yj.util.security;
 
 import org.apache.commons.codec.binary.Base64;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import java.security.SecureRandom;
+import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -140,6 +143,53 @@ public class DESUtil {
 
 
 
+    public static byte[] encrypt(byte[] datasource, String key) {
+        try{
+            SecureRandom random = new SecureRandom();
+            DESKeySpec desKey = new DESKeySpec(key.getBytes());
+            //创建一个密匙工厂，然后用它把DESKeySpec转换成
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+            SecretKey securekey = keyFactory.generateSecret(desKey);
+            //Cipher对象实际完成加密操作
+            Cipher cipher = Cipher.getInstance("DES");
+            //用密匙初始化Cipher对象
+            cipher.init(Cipher.ENCRYPT_MODE, securekey, random);
+            //现在，获取数据并加密
+            //正式执行加密操作
+            return cipher.doFinal(datasource);
+        }catch(Throwable e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+    public static byte[] decrypt(byte[] src, String key) throws Exception {
+        // DES算法要求有一个可信任的随机数源
+        SecureRandom random = new SecureRandom();
+        // 创建一个DESKeySpec对象
+        DESKeySpec desKey = new DESKeySpec(key.getBytes());
+        // 创建一个密匙工厂
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        // 将DESKeySpec对象转换成SecretKey对象
+        SecretKey securekey = keyFactory.generateSecret(desKey);
+        // Cipher对象实际完成解密操作
+        Cipher cipher = Cipher.getInstance("DES");
+        // 用密匙初始化Cipher对象
+        cipher.init(Cipher.DECRYPT_MODE, securekey, random);
+        // 真正开始解密操作
+        return cipher.doFinal(src);
+    }
+
+
+
+
+
+
+
+
     /**
      * encryptDES
      *
@@ -176,21 +226,24 @@ public class DESUtil {
     }
 
     public static void main(String[] args) throws Exception {
-//        String key = "ingage30";
-//
-//        byte[] t1=encryptECB("ingage".getBytes(),key.getBytes());
-//
-//        System.out.println(Base64.encodeBase64String(t1));
-//
-//        System.out.println(new String(decryptECB(t1,key.getBytes())));
-//
-//
-//        String s1 = encryptCBC("ingage", key);
-//        System.out.println(s1);
-//
-//        System.out.println(decryptCBC(s1, key));
+        String str="ingage";
+        String desKey="12345678";
+        Map<String,byte[]> keyMap= RSAUtil.generateKeyBytes();
+        PublicKey publicKey=RSAUtil.restorePublicKey(keyMap.get("publicKey"));
+        PrivateKey privateKey=RSAUtil.restorePrivateKey(keyMap.get("privateKey"));
+        String md5str=SecurityUtil.md5code(str);
+        System.out.println(md5str);
+        byte[] b=encryptECB( md5str.getBytes(),desKey.getBytes());
+        System.out.println(Base64.encodeBase64String(b));
 
-        System.out.println(Base64.encodeBase64String(generateKey()));
+        byte[] rsa= RSAUtil.RSAEncode(publicKey,desKey.getBytes());
+
+        System.out.println(Base64.encodeBase64String(rsa));
+
+        String t=RSAUtil.RSADecode(privateKey,rsa);
+        System.out.println(Base64.encodeBase64String(t.getBytes()));
+        byte []a=decryptECB(b,t.getBytes());
+        System.out.println(new String(a));
 
     }
 }

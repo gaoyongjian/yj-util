@@ -6,7 +6,6 @@ package com.yj.util.security;
 
 
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -44,15 +43,6 @@ public class RSAUtil {
 
 //        createKey();
 
-        String puk="Sun RSA public key, 2048 bits\n" +
-                "  modulus: 23708315316385396629926519474872553572561952756052209049429371848829088500640490386457313358022004775166484493828776986510351963864305247014093308430990745102839056345622394636841668003243104963970941877920897333109441873821378195299663304387724965468924621924119081042882648358045800021134249632552707133974619217936200278950130938684668796261496144148073707222068928917275572184353648769331645710642284689946154483329225724090707724396821031162961110265753320852446395489898413797777668962420846515140619163612528122374075736962728840661532707636981820410350318507231343254711901133590962307567832542671335993593533\n" +
-                "  public exponent: 65537";
-        String prK="\u0001\u0001\u0001\u0005 \u0004�\u0004�0�\u0004�\u0002\u0001 \u0002�\u0001\u0001 ��X4!҃����i#��l��;l��?P\u0011�8d/�u���\u0010�b\n" +
-                "���$\u0013��-��\u000Enx�G�\u0602s��4=F\u001D�\u0015� �Z��l�ԉ��<�\t_KWBzJ\u0016��d�P�v� \u007F��i\u0014��j8ک�x�\u000B����>;Lf��֞[��;���ږ���>��\u0007��\u000BuF0�\"1��6�Q���>�b$��v��Q�M�u�\u0001��N�\u0013X���+�/�Z\\$�1+B�lD�\u0018\u0011�7[7�=�\b�H��+P�;֬��t-\n" +
-                "\u001F\"G�\u0004F�\u000B��䡖+\u0019\u001D\u0006.Ɋ��\u000FN�\u0002\u0003\u0001 \u0001\u0002�\u0001 #��xM��>�+�S�Ud���xC�d��' �\u000E\u0019\n" +
-                "�&\u0007!�\u000F�\uDB7E\uDFE7�6\u001E%jj�lʶ':�\u0003��vo�N\u0016\u000Fx�]��\u000E[ױ�Wԙ�$�K�\u001DU\u0006��m1��\n" +
-                "F ׂ�t\u001F\u001C'S��\u0006X��\u0003b\u000B2Eg����˽�\u0003���\u0012E\u0019�ېd\u001D�&wT\u001E���\u000F<lt\u0013)���\u0012\u001F�/��\"lܤ1��\u0006\u000EM��\u0016�2,K�\u000F�k��a�^+�}8�zI\u0012l&�m�\u0015o�S'W�0|\"���a\u0011H|ǋ\u0002�� ��2G,[\u0019yG��̲\u0018��~\t�j�ʊ\u0018�q�~\u0001���~�kp�zi;���i��h�ר�\\�*%LD�\b�*��h�]t��?��6�T�\u0018q;�~�oqc���.z�3y�����x���ۋ�����\u0013�Z��4I���/���6�*K�\u0002��.\u001A�:ӘJ����\u0014��>��\u007Fag��w5��r��ф��\"�\"I�!b�\"L���\n" +
-                "&��6[����\u0005c���;\u001A�D�C�\u001B�\u000EM��\u001Aǣ���Lr~\u0005�X�xb��3�\f�\u0018�ź\u0015P\u001F�^lB)�5�\t���A\u0015�?�;D�p���\t�f������|�T^���\u007F\u001E��{\u0005\u001Bo����Km���\u0002��=���\u0002������5�u�3��e���u��C���U���%���\u000BԦ\u0007�[g�/\u001FF�$�~�v�r<���\u0017��b[��O$~$�� ����j����܋\u0017�[�o�Ts��TWW��&T#��\u000E��m�}y� R�p(��\n";
     }
 
 
@@ -76,7 +66,6 @@ public class RSAUtil {
         PublicKey publicKey = restorePublicKey(keyMap.get(PUBLIC_KEY));
 
         byte[] encodedText = RSAEncode(publicKey, PLAIN_TEXT.getBytes());
-        System.out.println("RSA encoded: " + Base64Util.encode(encodedText));
         System.out.println("RSA encoded: " + Base64.encodeBase64String(encodedText));
 
         // 解密
